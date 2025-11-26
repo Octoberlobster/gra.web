@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIversity 專題海報 (A1 尺寸 + 出血區)</title>
+    <title>AIversity 專題海報 (A1 尺寸)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* A1 實際尺寸: 594mm x 841mm */
-        /* 加上出血區: 每邊+3mm = 600mm x 847mm */
+        /* A1 尺寸: 594mm x 841mm */
         /* 螢幕顯示比例: 96dpi 換算 */
         
         :root {
-            --bleed: 11.34px; /* 3mm 出血區 (3mm ÷ 25.4 × 96dpi) */
-            --safe-margin: 18.9px; /* 5mm 安全區域 */
+            --safe-margin: 30px;
             
-            /* A1 + 出血區尺寸 (螢幕顯示) */
-            --poster-width: 900px;  /* 約 600mm */
-            --poster-height: 1273px; /* 約 847mm */
+            /* A1 尺寸 (螢幕顯示) */
+            --poster-width: 850px;
+            --poster-height: 1200px;
             
             --primary-color: #1e3a8a;
             --accent-color: #7c3aed;
@@ -27,18 +25,12 @@
         
         @media print {
             :root {
-                --poster-width: 600mm;
-                --poster-height: 847mm;
+                --poster-width: 594mm;
+                --poster-height: 841mm;
             }
             body {
                 margin: 0;
                 padding: 0;
-            }
-            .crop-marks {
-                display: block !important;
-            }
-            .safe-zone-guide {
-                display: none !important;
             }
         }
 
@@ -57,65 +49,23 @@
             overflow: auto;
         }
 
-        .poster-wrapper {
-            position: relative;
+        .poster-container {
             width: var(--poster-width);
             height: var(--poster-height);
-        }
-
-        /* 裁切標記 */
-        .crop-marks {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            display: none; /* 螢幕上隱藏，列印時顯示 */
-            z-index: 10000;
-        }
-
-        .crop-mark {
-            position: absolute;
-            background: black;
-        }
-
-        /* 四角裁切線 */
-        .crop-mark.top-left-h { top: var(--bleed); left: 0; width: 10mm; height: 0.5pt; }
-        .crop-mark.top-left-v { top: 0; left: var(--bleed); width: 0.5pt; height: 10mm; }
-        .crop-mark.top-right-h { top: var(--bleed); right: 0; width: 10mm; height: 0.5pt; }
-        .crop-mark.top-right-v { top: 0; right: var(--bleed); width: 0.5pt; height: 10mm; }
-        .crop-mark.bottom-left-h { bottom: var(--bleed); left: 0; width: 10mm; height: 0.5pt; }
-        .crop-mark.bottom-left-v { bottom: 0; left: var(--bleed); width: 0.5pt; height: 10mm; }
-        .crop-mark.bottom-right-h { bottom: var(--bleed); right: 0; width: 10mm; height: 0.5pt; }
-        .crop-mark.bottom-right-v { bottom: 0; right: var(--bleed); width: 0.5pt; height: 10mm; }
-
-        .poster-container {
-            width: 100%;
-            height: 100%;
             background-color: white;
             box-shadow: 0 15px 30px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             position: relative;
-        }
-
-        /* 安全區域提示線（僅螢幕預覽顯示） */
-        .safe-zone-guide {
-            position: absolute;
-            top: calc(var(--bleed) + var(--safe-margin));
-            left: calc(var(--bleed) + var(--safe-margin));
-            right: calc(var(--bleed) + var(--safe-margin));
-            bottom: calc(var(--bleed) + var(--safe-margin));
-            border: 1px dashed rgba(255, 0, 0, 0.3);
-            pointer-events: none;
-            z-index: 9999;
+            flex-shrink: 0;
         }
 
         /* Header */
         .poster-header {
             background: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
             color: white;
-            padding: 25px calc(var(--bleed) + var(--safe-margin));
+            padding: 25px var(--safe-margin);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -129,7 +79,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            padding: 15px calc(var(--bleed) + var(--safe-margin)) 20px calc(var(--bleed) + var(--safe-margin));
+            padding: 15px var(--safe-margin) 20px var(--safe-margin);
             height: calc(100% - 140px);
             overflow: hidden;
         }
@@ -292,24 +242,9 @@
 </head>
 <body>
 
-    <div class="poster-wrapper">
-        <!-- 裁切標記 -->
-        <div class="crop-marks">
-            <div class="crop-mark top-left-h"></div>
-            <div class="crop-mark top-left-v"></div>
-            <div class="crop-mark top-right-h"></div>
-            <div class="crop-mark top-right-v"></div>
-            <div class="crop-mark bottom-left-h"></div>
-            <div class="crop-mark bottom-left-v"></div>
-            <div class="crop-mark bottom-right-h"></div>
-            <div class="crop-mark bottom-right-v"></div>
-        </div>
-
-        <div class="poster-container">
-            <!-- 安全區域提示線（僅螢幕預覽） -->
-            <div class="safe-zone-guide"></div>
-            
-            <!-- Header -->
+    <div class="poster-container">
+        
+        <!-- Header -->
         <header class="poster-header">
             <div style="flex: 2;">
                 <h1 class="text-5xl font-black mb-2 tracking-wide text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">AIversity</h1>
@@ -437,7 +372,6 @@
             </div>
         </div>
         
-        </div>
     </div>
 
 </body>
