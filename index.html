@@ -43,7 +43,7 @@
             --text-color: #1f2937;
             
             --header-height: 110mm; /* 調整標頭高度以符合 A1 比例 */
-            --safe-margin: 25mm;    /* 邊距改用 mm */
+            --safe-margin: 15mm;    /* 邊距改用 mm */
         }
 
         body {
@@ -92,15 +92,15 @@
             align-items: center;
             flex-shrink: 0;
             height: var(--header-height);
-            border-bottom: 3mm solid #fbbf24; /* 加粗邊框 */
+            //border-bottom: 3mm solid #fbbf24; /* 加粗邊框 */
         }
 
         /* Content Layout */
         .poster-content {
             display: flex;
             flex-direction: column;
-            gap: 8mm;
-            padding: 10mm var(--safe-margin) 15mm var(--safe-margin);
+            gap: 26mm;
+            padding: 26mm var(--safe-margin) 15mm var(--safe-margin);
             height: calc(100% - var(--header-height));
             overflow: hidden;
         }
@@ -126,7 +126,7 @@
         }
         
         .section-title {
-            font-size: 2.6rem; /* 標題字體放大 */
+            font-size: 3.2rem; /* 標題字體放大 */
             font-weight: 900;
             color: var(--primary-color);
             border-bottom: 3px solid #ddd6fe;
@@ -134,7 +134,7 @@
             margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             line-height: 1.2;
             flex-shrink: 0;
         }
@@ -206,11 +206,11 @@
                     <h1 class="text-5xl font-black mb-4 tracking-wide text-white" style="text-shadow: 4px 4px 8px rgba(0,0,0,0.3);">AIversity</h1>
                     <h2 class="text-4xl font-bold opacity-90 text-blue-100" style="font-size: 3.5rem;">以大語言模型建構多視角與深度分析之新一代新聞媒體</h2>
                 </div>
-                <div class="text-right pl-6 h-full flex flex-col justify-center" style="min-width: 450px;">
-                    <div class="bg-white/10 px-6 py-3 rounded-2xl backdrop-blur-sm inline-block mb-3 self-end">
+                <div class="text-right pl-6 h-full flex flex-col justify-center items-end" style="min-width: 450px;">
+                    <div class="bg-white/10 px-6 py-3 rounded-2xl backdrop-blur-sm mb-3">
                         <span class="text-3xl font-bold text-white" style="font-size: 3rem;">國立高雄大學 資訊工程學系</span>
                     </div>
-                    <div class="text-2xl text-blue-200 mt-2 font-medium" style="font-size: 2.5rem;">林柏諺、李憲昌、何皓宇、宋暐竣</div>
+                    <div class="text-2xl text-blue-200 mt-2 font-medium" style="font-size: 2.6rem;">林柏諺、李憲昌、何皓宇、宋暐竣</div>
                 </div>
             </header>
     
@@ -219,19 +219,19 @@
                 <div class="middle-section" style="height: 320mm;">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; height: 100%;">
                         <!-- 左側：摘要 + 平台比較 (上下排列) -->
-                        <div style="display: flex; flex-direction: column; gap: 5mm;">
+                        <div style="display: flex; flex-direction: column; gap: 12mm;">
                             <!-- 上：摘要 -->
                             <div class="section-box bg-blue-50/50" style="border-color: #bfdbfe; flex: 0.8;">
                                 <div class="section-title">
                                     <i class="fas fa-file-alt"></i> 1. 摘要 (Abstract)
                                 </div>
-                                <p class="text-slate-800 leading-relaxed">
+                                <p class="text-slate-800 leading-relaxed" style="font-size: 2.2rem;">
                                     本作品「<span class="text-blue-800 font-bold">AIversity</span>」運用<span class="text-blue-700 font-bold bg-blue-100 px-2 py-0.5 rounded">大型語言模型（LLM）</span>建構新一代新聞平台，提供<span class="text-blue-700 font-bold bg-blue-100 px-2 py-0.5 rounded">多視角與深度分析</span>。旨在解決當代讀者四大挑戰：<span class="text-red-600 font-semibold">資訊破碎化</span>導致的認知過載、<span class="text-red-600 font-semibold">演算法同溫層效應</span>、<span class="text-red-600 font-semibold">快節奏閱讀</span>帶來的思維淺薄化，以及<span class="text-red-600 font-semibold">語言文化屏障</span>。透過「<span class="text-purple-700 font-bold">AI 綜合新聞</span>」消除冗餘、「<span class="text-purple-700 font-bold">六何分析心智圖</span>」建立全貌、「<span class="text-purple-700 font-bold">AI 專家分析</span>」與「<span class="text-purple-700 font-bold">正反觀點</span>」破除同溫層、「<span class="text-purple-700 font-bold">AI 專家小幫手</span>」引導深度思考，並支援「<span class="text-purple-700 font-bold">多語報導</span>」與「<span class="text-purple-700 font-bold">跨語在地新聞</span>」功能，跨越語言隔閡。
                                 </p>
                             </div>
                             
                             <!-- 下：平台比較 -->
-                            <div class="section-box" style="flex: 1.2;">
+                            <div class="section-box" style="flex: 0.7;">
                                 <div class="section-title">
                                     <i class="fas fa-balance-scale"></i> 2. 現有平台 V.S. AIversity
                                 </div>
@@ -254,11 +254,6 @@
                                             <td style="padding: 10px 8px; vertical-align: top; font-weight: 700; border-right: 2px solid #e5e7eb; background-color: #f8fafc;">同溫層效應</td>
                                             <td style="padding: 10px 8px; vertical-align: top; border-right: 2px solid #e5e7eb;">演算法放大同質內容，限制多元化</td>
                                             <td style="padding: 10px 8px; vertical-align: top; background-color: #f0fdf4;"><span class="text-green-700 font-semibold">多元立場分析，主動呈現多種觀點</span></td>
-                                        </tr>
-                                        <tr style="border-bottom: 2px solid #e5e7eb;">
-                                            <td style="padding: 10px 8px; vertical-align: top; font-weight: 700; border-right: 2px solid #e5e7eb; background-color: #f8fafc;">思維淺薄化</td>
-                                            <td style="padding: 10px 8px; vertical-align: top; border-right: 2px solid #e5e7eb;">追求快速短內容，導致表面掃描</td>
-                                            <td style="padding: 10px 8px; vertical-align: top; background-color: #f0fdf4;"><span class="text-green-700 font-semibold">六何心智圖與專題報告，促進深度思辨</span></td>
                                         </tr>
                                         <tr>
                                             <td style="padding: 10px 8px; vertical-align: top; font-weight: 700; border-right: 2px solid #e5e7eb; background-color: #f8fafc;">語言與文化屏障</td>
@@ -293,37 +288,30 @@
                             
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; height: 145mm;">
                                 <div class="feature-item" style="padding: 8px;">
-                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-newspaper mr-2"></i>彙整多家新聞</h4>
+                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-newspaper mr-2"></i>痛點一、彙整多家新聞</h4>
                                     <div class="bg-white border rounded-xl flex-grow overflow-hidden relative shadow-inner">
                                         <img src="圖片8.png" alt="彙整多家新聞示意圖" class="w-full h-full object-contain">
                                     </div>
                                 </div>
     
                                 <div class="feature-item" style="padding: 8px;">
-                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-yin-yang mr-2"></i>主動提供多元觀點</h4>
+                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-project-diagram mr-2"></i>痛點一、快速了解專題脈絡</h4>
+                                    
                                     <div class="flex gap-2 flex-grow overflow-hidden">
                                         <div class="flex flex-col gap-2" style="flex: 1;">
                                             <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
-                                                <img src="圖片10.png" alt="多元觀點示意圖2" class="w-full h-full object-contain">
+                                                <img src="專題脈絡示意圖.png" alt="多元觀點示意圖2" class="w-full h-full object-contain">
                                             </div>
-                                            <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
-                                                <img src="圖片11.png" alt="多元觀點示意圖3" class="w-full h-full object-contain">
-                                            </div>
-                                        </div>
-                                        <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
-                                            <img src="圖片9.png" alt="多元觀點示意圖1" class="w-full h-full object-contain">
                                         </div>
                                     </div>
                                 </div>
     
                                 <div class="feature-item" style="padding: 8px;">
-                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-robot mr-2"></i>AI小幫手協助深入了解</h4>
+                                    
+                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-robot mr-2"></i>痛點二、AI小幫手協助深入了解</h4>
                                     <div class="flex gap-2 flex-grow overflow-hidden">
                                         <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
-                                            <img src="圖片13.png" alt="AI小幫手示意圖1" class="w-full h-full object-contain">
-                                        </div>
-                                        <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
-                                            <img src="圖片12.png" alt="AI小幫手示意圖2" class="w-full h-full object-contain">
+                                            <img src="AI小幫手協助深入了解.png" alt="AI小幫手示意圖1" class="w-full h-full object-contain">
                                         </div>
                                     </div>
                                 </div>
@@ -331,25 +319,28 @@
     
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6mm; height: 145mm;">
                                 <div class="feature-item" style="padding: 8px;">
-                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-globe mr-2"></i>提供多語系、多國來源新聞</h4>
+                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-yin-yang mr-2"></i>痛點二、主動提供多元觀點</h4>
+                                    
                                     <div class="flex gap-2 flex-grow overflow-hidden">
-                                        <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
-                                            <img src="圖片16.png" alt="多語系新聞示意圖1" class="w-full h-full object-contain">
+                                        <div class="flex flex-col gap-2" style="flex: 1;">
+                                            <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
+                                                <img src="主動提供多元觀點1.png" alt="多元觀點示意圖2" class="w-full h-full object-contain">
+                                            </div>
                                         </div>
                                         <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
-                                            <img src="圖片17.png" alt="多語系新聞示意圖2" class="w-full h-full object-contain">
+                                            <img src="主動提供多元觀點2.png" alt="多元觀點示意圖1" class="w-full h-full object-contain">
                                         </div>
                                     </div>
                                 </div>
     
                                 <div class="feature-item" style="padding: 10px;">
-                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-project-diagram mr-2"></i>快速了解專題脈絡</h4>
+                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-globe mr-2"></i>痛點三、提供多語系、多國來源新聞</h4>
                                     <div class="flex gap-2 flex-grow overflow-hidden">
                                         <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
-                                            <img src="圖片18.png" alt="專題脈絡示意圖1" class="w-full h-full object-contain">
+                                            <img src="提供多語系多國來源新聞1.png" alt="多語系新聞示意圖1" class="w-full h-full object-contain">
                                         </div>
                                         <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
-                                            <img src="圖片19.png" alt="專題脈絡示意圖2" class="w-full h-full object-contain">
+                                            <img src="提供多語系多國來源新聞2.png" alt="多語系新聞示意圖2" class="w-full h-full object-contain">
                                         </div>
                                     </div>
                                 </div>
