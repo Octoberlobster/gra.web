@@ -3,387 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIversity 專題海報 (A1 列印版)</title>
+    <title>AIversity 專題海報 (A1 Print Ready)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    // 為了 A1 海報，我們擴充文字大小定義
+                    fontSize: {
+                        'xs': '0.75rem',  // 原本太小，保留比例
+                        'sm': '0.85rem', 
+                        'base': '1rem',
+                        'lg': '1.25rem',
+                        'xl': '1.5rem',
+                        '2xl': '1.75rem',
+                        '5xl': '4rem',    // 標題放大
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* A1 尺寸: 594mm x 841mm (列印優化) */
+        /* A1 尺寸: 594mm x 841mm */
         
         :root {
-            --safe-margin: 6mm;
-            
-            /* A1 尺寸 */
             --poster-width: 594mm;
             --poster-height: 841mm;
+            
+            /* 關鍵調整：基礎字體大小放大。
+               網頁預設是 16px，A1 海報建議基礎字體至少要 24pt-32pt (約 32px-42px) 才能遠距離閱讀。
+               這裡設定 1rem = 32px，這樣 Tailwind 的 class 就會自動等比放大。
+            */
+            --base-font-size: 32px; 
             
             --primary-color: #1e3a8a;
             --accent-color: #7c3aed;
             --text-color: #1f2937;
-        }
-        
-        @media print {
-            @page {
-                size: A1;
-                margin: 0;
-            }
             
-            body {
-                margin: 0;
-                padding: 0;
-                background: white;
-            }
-            
-            .poster-container {
-                box-shadow: none;
-                page-break-after: avoid;
-                page-break-inside: avoid;
-            }
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
+            --header-height: 110mm; /* 調整標頭高度以符合 A1 比例 */
+            --safe-margin: 25mm;    /* 邊距改用 mm */
         }
 
         body {
-            background-color: white;
+            background-color: #555; /* 螢幕背景深色，凸顯海報 */
             font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 0;
-            margin: 0;
             min-height: 100vh;
             overflow: auto;
         }
 
+        /* 螢幕預覽時的縮放容器 (讓你在螢幕上能看到整張 A1) */
+        .preview-wrapper {
+            margin: 20px;
+            transform-origin: top center;
+            /* 依據螢幕寬度自動縮放，約縮小到 0.2 ~ 0.3 倍 */
+            transform: scale(0.25); 
+            height: var(--poster-height); /* 佔位高度 */
+        }
+
+        /* 實際海報容器 */
         .poster-container {
             width: var(--poster-width);
             height: var(--poster-height);
             background-color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             position: relative;
-            flex-shrink: 0;
+            
+            /* 套用放大後的字體基準 */
+            font-size: var(--base-font-size);
         }
 
         /* Header */
         .poster-header {
             background: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
             color: white;
-            padding: 6mm var(--safe-margin);
+            padding: 20mm var(--safe-margin);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-shrink: 0;
-            height: 45mm;
-            border-bottom: 2mm solid #fbbf24;
+            height: var(--header-height);
+            border-bottom: 3mm solid #fbbf24; /* 加粗邊框 */
         }
 
-        /* Content Layout (Two Parts) */
+        /* Content Layout */
         .poster-content {
             display: flex;
             flex-direction: column;
-            gap: 3mm;
-            padding: 4mm var(--safe-margin) 4mm var(--safe-margin);
-            height: calc(100% - 45mm);
+            gap: 15mm; /* 增加區塊間距 */
+            padding: 15mm var(--safe-margin) 20mm var(--safe-margin);
+            height: calc(100% - var(--header-height));
             overflow: hidden;
         }
 
-        .top-section {
-            flex-shrink: 0;
-            height: 185mm;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3mm;
-        }
-
-        .middle-section {
-            display: none;
-        }
-
-        .bottom-section {
-            flex-shrink: 0;
-            overflow: visible;
-        }
-
-        .column {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        .top-section { flex-shrink: 0; }
+        .middle-section { flex-shrink: 0; margin-top: 5mm; }
+        .bottom-section { 
+            flex-grow: 1; 
+            overflow: hidden; 
+            margin-top: 5mm;
+            min-height: 0;
         }
 
         /* Section Styling */
         .section-box {
             background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 4mm;
-            box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.1);
-            position: relative;
+            border: 2mm solid #e5e7eb; /* 邊框加粗 */
+            border-radius: 20px;       /* 圓角放大 */
+            padding: 20px;             /* 內距調整 */
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             height: 100%;
         }
         
         .section-title {
-            font-size: 8mm;
+            font-size: 1.4rem; /* 標題字體放大 */
             font-weight: 900;
             color: var(--primary-color);
-            border-bottom: 2px solid #ddd6fe;
-            padding-bottom: 2mm;
-            margin-bottom: 3mm;
+            border-bottom: 3px solid #ddd6fe;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 2.5mm;
+            gap: 15px;
             line-height: 1.2;
         }
-        .section-title i {
-            color: var(--accent-color);
-            font-size: 8mm;
-        }
-
-        /* Pain Points */
-        .pain-point-card {
-            background: #f8fafc;
-            border-left: 4px solid #ef4444;
-            padding: 8px;
-            margin-bottom: 8px;
-            border-radius: 0 6px 6px 0;
-        }
-        .pain-point-card:last-child { margin-bottom: 0; }
-
-        /* Comparison Table */
-        .comparison-table {
-            width: 100%;
-            font-size: 0.75rem;
-            border-collapse: collapse;
-            margin-top: auto;
-        }
-        .comparison-table th {
-            background-color: #eff6ff;
-            color: var(--primary-color);
-            padding: 6px;
-            text-align: left;
-            border-bottom: 2px solid #bfdbfe;
-            font-size: 0.8rem;
-        }
-        .comparison-table td {
-            padding: 6px;
-            border-bottom: 1px solid #e5e7eb;
-            vertical-align: top;
-            line-height: 1.3;
-        }
         
-        /* Architecture Diagram */
-        .arch-layer {
-            background: white;
-            border: 2px dashed #94a3b8;
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-        .arch-arrow {
-            text-align: center;
-            color: #cbd5e1;
-            font-size: 1.4rem;
-            line-height: 1;
-            margin: -6px 0 2px 0;
-        }
+        .section-title i { color: var(--accent-color); }
 
-        /* Features */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3mm;
-            flex-grow: 1;
-        }
+        /* Feature Items */
         .feature-item {
             background: #f3f4f6;
-            border-radius: 6px;
-            padding: 2.5mm;
-            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
             display: flex;
             flex-direction: column;
             min-height: 0;
             overflow: hidden;
         }
-        
-        /* Mindmap */
-        .mock-mindmap {
-            flex-grow: 1;
-            background: white;
-            border-radius: 8px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #e2e8f0;
-            min-height: 140px;
+
+        /* Typography Adjustments for Poster */
+        p { 
+            line-height: 1.5; 
+            font-size: 1rem; /* 使用基礎字體大小 (32px) */
+            color: #374151; 
+            margin: 0; 
+            text-align: justify;
         }
-        .mindmap-node {
-            position: absolute;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.75rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            z-index: 10;
+        
+        h4 {
+            font-size: 1.1rem; /* 小標題放大 */
+            margin-bottom: 8px !important;
         }
 
-        /* Typography */
-        p { line-height: 1.6; font-size: 5.5mm; color: #374151; margin: 0; }
-        h3 { font-size: 6mm; font-weight: 700; color: #1e3a8a; margin: 0 0 2mm 0; }
-        h4 { line-height: 1.4; font-size: 5.5mm; }
-        
-        /* Footer Text */
-        .footer-text {
-            text-align: center;
-            opacity: 0.6;
-            font-size: 4.5mm;
-            margin-top: 3mm;
-            white-space: nowrap;
+        /* 列印設定 (Print) - 輸出 PDF 時會觸發 */
+        @media print {
+            body {
+                background: none;
+                display: block;
+                margin: 0;
+                padding: 0;
+                width: var(--poster-width);
+                height: var(--poster-height);
+            }
+            .preview-wrapper {
+                margin: 0;
+                transform: scale(1) !important; /* 移除縮放，恢復原尺寸 */
+                width: 100%;
+                height: 100%;
+            }
+            .poster-container {
+                box-shadow: none;
+                -webkit-print-color-adjust: exact; /* 強制列印背景色 */
+                print-color-adjust: exact;
+            }
+            @page {
+                size: A1 portrait; /* 設定 PDF 頁面大小 */
+                margin: 0;
+            }
         }
-
     </style>
 </head>
 <body>
 
-    <div class="poster-container">
-        
-        <!-- Header -->
-        <header class="poster-header">
-            <div style="flex: 1;">
-                <h1 class="font-black tracking-wide text-white" style="font-size: 18mm; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); line-height: 1.1; margin-bottom: 2mm;">AIversity</h1>
-                <h2 class="font-bold opacity-90 text-blue-100" style="font-size: 6.5mm; line-height: 1.3;">以大語言模型建構多視角與深度分析之新一代新聞媒體</h2>
-            </div>
-            <div class="text-right h-full flex flex-col justify-center" style="border: 2px solid white; border-radius: 8px; padding: 4mm 5mm; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
-                <div class="font-bold text-white" style="font-size: 6mm; line-height: 1.2;">國立高雄大學 資訊工程學系</div>
-                <div class="text-blue-100" style="font-size: 5mm; margin-top: 2mm; line-height: 1.2;">林柏諺、李憲昌、何皓宇、宋暐竣</div>
-            </div>
-        </header>
-
-        <!-- Main Content -->
-        <div class="poster-content">
+    <div class="preview-wrapper" id="previewWrapper">
+        <div class="poster-container">
             
-            <!-- Top Section: Abstract and System Architecture Side by Side -->
-            <div class="top-section">
-                <!-- Left: Abstract -->
-                <div class="section-box bg-blue-50/50" style="border-color: #bfdbfe;">
-                    <div class="section-title">
-                        <i class="fas fa-file-alt"></i> 1. 摘要 (Abstract)
+            <header class="poster-header">
+                <div style="flex: 2;">
+                    <h1 class="text-5xl font-black mb-4 tracking-wide text-white" style="text-shadow: 4px 4px 8px rgba(0,0,0,0.3);">AIversity</h1>
+                    <h2 class="text-2xl font-bold opacity-90 text-blue-100">以大語言模型建構多視角與深度分析之新一代新聞媒體</h2>
+                </div>
+                <div class="text-right pl-6 h-full flex flex-col justify-center" style="min-width: 450px;">
+                    <div class="bg-white/10 px-6 py-3 rounded-2xl backdrop-blur-sm inline-block mb-3 self-end">
+                        <span class="text-xl font-bold text-white">國立高雄大學 資訊工程學系</span>
                     </div>
-                    <p class="text-justify text-slate-800">
-                        本作品「<span class="text-blue-800 font-bold">AIversity</span>」運用<span class="text-blue-700 font-bold bg-blue-100 px-1 rounded">大型語言模型（LLM）</span>建構新一代新聞平台，提供<span class="text-blue-700 font-bold bg-blue-100 px-1 rounded">多視角與深度分析</span>。旨在解決當代讀者四大挑戰：<span class="text-red-600 font-semibold">資訊破碎化</span>導致的認知過載、<span class="text-red-600 font-semibold">演算法同溫層效應</span>、<span class="text-red-600 font-semibold">快節奏閱讀</span>帶來的思維淺薄化，以及<span class="text-red-600 font-semibold">語言文化屏障</span>。透過「<span class="text-purple-700 font-bold">AI 綜合新聞</span>」消除冗餘、「<span class="text-purple-700 font-bold">六何分析心智圖</span>」建立全貌、「<span class="text-purple-700 font-bold">AI 專家分析</span>」與「<span class="text-purple-700 font-bold">正反觀點</span>」破除同溫層、「<span class="text-purple-700 font-bold">AI 專家小幫手</span>」引導深度思考，並支援「<span class="text-purple-700 font-bold">多語報導</span>」與「<span class="text-purple-700 font-bold">跨語在地新聞</span>」功能，跨越語言隔閡。
-                    </p>
+                    <div class="text-lg text-blue-200 mt-2 font-medium">林柏諺、李憲昌、何皓宇、宋暐竣</div>
+                </div>
+            </header>
+    
+            <div class="poster-content">
+                
+                <div class="top-section">
+                    <div class="section-box bg-blue-50/50" style="border-color: #bfdbfe;">
+                        <div class="section-title">
+                            <i class="fas fa-file-alt"></i> 1. 摘要 (Abstract)
+                        </div>
+                        <p class="text-slate-800 leading-relaxed">
+                            本作品「<span class="text-blue-800 font-bold">AIversity</span>」運用<span class="text-blue-700 font-bold bg-blue-100 px-2 py-0.5 rounded">大型語言模型（LLM）</span>建構新一代新聞平台，提供<span class="text-blue-700 font-bold bg-blue-100 px-2 py-0.5 rounded">多視角與深度分析</span>。旨在解決當代讀者四大挑戰：<span class="text-red-600 font-semibold">資訊破碎化</span>導致的認知過載、<span class="text-red-600 font-semibold">演算法同溫層效應</span>、<span class="text-red-600 font-semibold">快節奏閱讀</span>帶來的思維淺薄化，以及<span class="text-red-600 font-semibold">語言文化屏障</span>。透過「<span class="text-purple-700 font-bold">AI 綜合新聞</span>」消除冗餘、「<span class="text-purple-700 font-bold">六何分析心智圖</span>」建立全貌、「<span class="text-purple-700 font-bold">AI 專家分析</span>」與「<span class="text-purple-700 font-bold">正反觀點</span>」破除同溫層、「<span class="text-purple-700 font-bold">AI 專家小幫手</span>」引導深度思考，並支援「<span class="text-purple-700 font-bold">多語報導</span>」與「<span class="text-purple-700 font-bold">跨語在地新聞</span>」功能，跨越語言隔閡。
+                        </p>
+                    </div>
                 </div>
                 
-                <!-- Right: System Architecture -->
-                <div class="section-box">
-                    <div class="section-title">
-                        <i class="fas fa-network-wired"></i> 2. 系統架構 (System Architecture)
-                    </div>
-                    
-                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center" style="flex: 1;">
-                        <img src="圖片21.png" alt="系統架構圖" class="w-full h-full object-contain">
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Bottom Section: Full Width Features -->
-            <div class="bottom-section">
-                <div class="section-box">
-                    <div class="section-title">
-                        <i class="fas fa-star"></i> 3. 核心功能展示
-                    </div>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 2.5mm;">
+                <div class="middle-section">
+                    <div class="section-box">
+                        <div class="section-title">
+                            <i class="fas fa-network-wired"></i> 2. 系統架構 (System Architecture)
+                        </div>
                         
-                        <!-- 上層: 1x3 -->
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5mm; height: 160mm;">
-                            <!-- 1. 彙整多家新聞 -->
-                            <div class="feature-item">
-                                <h4 class="font-bold text-blue-800 mb-1"><i class="fas fa-newspaper mr-1"></i>彙整多家新聞</h4>
-                                <div class="bg-white border rounded flex-grow overflow-hidden relative shadow-inner">
-                                    <img src="圖片8.png" alt="彙整多家新聞示意圖" class="w-full h-full object-contain">
-                                </div>
-                            </div>
-
-                            <!-- 2. 主動提供多元觀點 -->
-                            <div class="feature-item">
-                                <h4 class="font-bold text-blue-800 mb-1"><i class="fas fa-yin-yang mr-1"></i>主動提供多元觀點</h4>
-                                <div class="flex gap-1 flex-grow overflow-hidden">
-                                    <div class="flex flex-col gap-1" style="flex: 1;">
-                                        <div class="bg-white border rounded overflow-hidden shadow-inner" style="flex: 1;">
-                                            <img src="圖片10.png" alt="多元觀點示意圖2" class="w-full h-full object-contain">
-                                        </div>
-                                        <div class="bg-white border rounded overflow-hidden shadow-inner" style="flex: 1;">
-                                            <img src="圖片11.png" alt="多元觀點示意圖3" class="w-full h-full object-contain">
-                                        </div>
-                                    </div>
-                                    <div class="bg-white border rounded overflow-hidden shadow-inner" style="flex: 1;">
-                                        <img src="圖片9.png" alt="多元觀點示意圖1" class="w-full h-full object-contain">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 3. AI小幫手協助深入了解 -->
-                            <div class="feature-item">
-                                <h4 class="font-bold text-blue-800 mb-1"><i class="fas fa-robot mr-1"></i>AI小幫手協助深入了解</h4>
-                                <div class="flex gap-1 flex-grow overflow-hidden">
-                                    <div class="bg-white border rounded overflow-hidden shadow-inner" style="flex: 1;">
-                                        <img src="圖片13.png" alt="AI小幫手示意圖1" class="w-full h-full object-contain">
-                                    </div>
-                                    <div class="bg-white border rounded overflow-hidden shadow-inner" style="flex: 1;">
-                                        <img src="圖片12.png" alt="AI小幫手示意圖2" class="w-full h-full object-contain">
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="bg-white rounded-2xl border-2 border-slate-200 overflow-hidden" style="height: 180mm; display: flex; justify-content: center; align-items: center; padding: 10px;">
+                            <img src="圖片21.png" alt="系統架構圖" class="w-full h-full object-contain">
                         </div>
-
-                        <!-- 下層: 1x2 -->
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5mm; height: 160mm;">
-                            <!-- 4. 提供多語系、多國來源新聞 -->
-                            <div class="feature-item">
-                                <h4 class="font-bold text-blue-800 mb-1"><i class="fas fa-globe mr-1"></i>提供多語系、多國來源新聞</h4>
-                                <div class="flex gap-1 flex-grow overflow-hidden">
-                                    <div class="bg-white border rounded overflow-hidden shadow-inner" style="flex: 1;">
-                                        <img src="圖片16.png" alt="多語系新聞示意圖1" class="w-full h-full object-contain">
-                                    </div>
-                                    <div class="bg-white border rounded overflow-hidden shadow-inner" style="flex: 1;">
-                                        <img src="圖片17.png" alt="多語系新聞示意圖2" class="w-full h-full object-contain">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 5. 快速了解專題脈絡 -->
-                            <div class="feature-item">
-                                <h4 class="font-bold text-blue-800 mb-1"><i class="fas fa-project-diagram mr-1"></i>快速了解專題脈絡</h4>
-                                <div class="flex gap-1 flex-grow overflow-hidden">
-                                    <div class="bg-white border rounded overflow-hidden shadow-inner" style="flex: 1;">
-                                        <img src="圖片18.png" alt="專題脈絡示意圖1" class="w-full h-full object-contain">
-                                    </div>
-                                    <div class="bg-white border rounded overflow-hidden shadow-inner" style="flex: 1;">
-                                        <img src="圖片19.png" alt="專題脈絡示意圖2" class="w-full h-full object-contain">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
                 
+                <div class="bottom-section">
+                    <div class="section-box" style="padding: 20px;">
+                        <div class="section-title" style="margin-bottom: 20px;">
+                            <i class="fas fa-star"></i> 3. 核心功能展示
+                        </div>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 10mm; height: calc(100% - 70px);">
+                            
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10mm; flex: 1.2;">
+                                <div class="feature-item">
+                                    <h4 class="font-bold text-blue-800 mb-2"><i class="fas fa-newspaper mr-2"></i>彙整多家新聞</h4>
+                                    <div class="bg-white border rounded-xl flex-grow overflow-hidden relative shadow-inner">
+                                        <img src="圖片8.png" alt="彙整多家新聞示意圖" class="w-full h-full object-contain">
+                                    </div>
+                                </div>
+    
+                                <div class="feature-item">
+                                    <h4 class="font-bold text-blue-800 mb-2"><i class="fas fa-yin-yang mr-2"></i>主動提供多元觀點</h4>
+                                    <div class="flex gap-2 flex-grow overflow-hidden">
+                                        <div class="flex flex-col gap-2" style="flex: 1;">
+                                            <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
+                                                <img src="圖片10.png" alt="多元觀點示意圖2" class="w-full h-full object-contain">
+                                            </div>
+                                            <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
+                                                <img src="圖片11.png" alt="多元觀點示意圖3" class="w-full h-full object-contain">
+                                            </div>
+                                        </div>
+                                        <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
+                                            <img src="圖片9.png" alt="多元觀點示意圖1" class="w-full h-full object-contain">
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="feature-item">
+                                    <h4 class="font-bold text-blue-800 mb-2"><i class="fas fa-robot mr-2"></i>AI小幫手協助深入了解</h4>
+                                    <div class="flex gap-2 flex-grow overflow-hidden">
+                                        <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
+                                            <img src="圖片13.png" alt="AI小幫手示意圖1" class="w-full h-full object-contain">
+                                        </div>
+                                        <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
+                                            <img src="圖片12.png" alt="AI小幫手示意圖2" class="w-full h-full object-contain">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10mm; flex: 1;">
+                                <div class="feature-item">
+                                    <h4 class="font-bold text-blue-800 mb-2"><i class="fas fa-globe mr-2"></i>提供多語系、多國來源新聞</h4>
+                                    <div class="flex gap-2 flex-grow overflow-hidden">
+                                        <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
+                                            <img src="圖片16.png" alt="多語系新聞示意圖1" class="w-full h-full object-contain">
+                                        </div>
+                                        <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
+                                            <img src="圖片17.png" alt="多語系新聞示意圖2" class="w-full h-full object-contain">
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="feature-item">
+                                    <h4 class="font-bold text-blue-800 mb-2"><i class="fas fa-project-diagram mr-2"></i>快速了解專題脈絡</h4>
+                                    <div class="flex gap-2 flex-grow overflow-hidden">
+                                        <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
+                                            <img src="圖片18.png" alt="專題脈絡示意圖1" class="w-full h-full object-contain">
+                                        </div>
+                                        <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
+                                            <img src="圖片19.png" alt="專題脈絡示意圖2" class="w-full h-full object-contain">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
             </div>
+            
         </div>
-        
     </div>
 
+    <script>
+        // 自動調整螢幕預覽比例
+        function adjustPreview() {
+            const wrapper = document.getElementById('previewWrapper');
+            const posterHeight = 1123; // A1 px at 96dpi (approx) for calculation logic, but here we used mm
+            // 簡單計算：讓海報高度適應螢幕高度的 90%
+            const scale = (window.innerHeight * 0.9) / (841 * 3.78); // 841mm 轉 px 約 3179px
+            // 設定一個合理的縮放範圍
+            const finalScale = Math.min(Math.max(scale, 0.15), 0.5); 
+            
+            // 這裡手動設定縮放方便你看，你可以改這裡的數值來放大縮小預覽
+            wrapper.style.transform = `scale(0.3)`; 
+        }
+        
+        // window.addEventListener('resize', adjustPreview);
+        // adjustPreview();
+    </script>
 </body>
 </html>
