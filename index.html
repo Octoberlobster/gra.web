@@ -99,7 +99,7 @@
         .poster-content {
             display: flex;
             flex-direction: column;
-            gap: 26mm;
+            gap: 5mm;
             padding: 26mm var(--safe-margin) 15mm var(--safe-margin);
             height: calc(100% - var(--header-height));
             overflow: hidden;
@@ -126,7 +126,7 @@
         }
         
         .section-title {
-            font-size: 3.2rem; /* 標題字體放大 */
+            font-size: 3.8rem; /* 標題字體放大 */
             font-weight: 900;
             color: var(--primary-color);
             border-bottom: 3px solid #ddd6fe;
@@ -216,68 +216,69 @@
     
             <div class="poster-content">
                 
-                <div class="middle-section" style="height: 320mm;">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; height: 100%;">
-                        <!-- 左側：摘要 + 平台比較 (上下排列) -->
-                        <div style="display: flex; flex-direction: column; gap: 12mm;">
-                            <!-- 上：摘要 -->
-                            <div class="section-box bg-blue-50/50" style="border-color: #bfdbfe; flex: 0.8;">
-                                <div class="section-title">
-                                    <i class="fas fa-file-alt"></i> 1. 摘要 (Abstract)
-                                </div>
-                                <p class="text-slate-800 leading-relaxed" style="font-size: 2.2rem;">
-                                    本作品「<span class="text-blue-800 font-bold">AIversity</span>」運用<span class="text-blue-700 font-bold bg-blue-100 px-2 py-0.5 rounded">大型語言模型（LLM）</span>建構新一代新聞平台，提供<span class="text-blue-700 font-bold bg-blue-100 px-2 py-0.5 rounded">多視角與深度分析</span>。旨在解決當代讀者三大挑戰：<span class="text-red-600 font-semibold">資訊破碎化</span>導致的認知過載、<span class="text-red-600 font-semibold">演算法同溫層效應</span>，以及<span class="text-red-600 font-semibold">語言文化屏障</span>。透過「<span class="text-purple-700 font-bold">AI 綜合新聞</span>」消除冗餘、「<span class="text-purple-700 font-bold">六何分析心智圖</span>」建立全貌、「<span class="text-purple-700 font-bold">AI 專家分析</span>」與「<span class="text-purple-700 font-bold">正反觀點</span>」破除同溫層、「<span class="text-purple-700 font-bold">AI 專家小幫手</span>」引導深度思考，並支援「<span class="text-purple-700 font-bold">多語報導</span>」與「<span class="text-purple-700 font-bold">跨語在地新聞</span>」功能，跨越語言隔閡。
-                                </p>
+                <!-- Top Section: 摘要 + 系統架構 -->
+                <div class="top-section">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5mm;">
+                        <!-- 左：摘要 -->
+                        <div class="section-box bg-blue-50/50" style="border-color: #bfdbfe;">
+                            <div class="section-title">
+                                <i class="fas fa-file-alt"></i> 1. 摘要
                             </div>
-                            
-                            <!-- 下：平台比較 -->
-                            <div class="section-box" style="flex: 0.7;">
-                                <div class="section-title">
-                                    <i class="fas fa-code-compare"></i> 2. 現有平台 V.S. AIversity
-                                </div>
-                                
-                                <table class="w-full" style="border-collapse: collapse; font-size: 1.8rem;">
-                                    <thead>
-                                        <tr style="background-color: #eff6ff; border-bottom: 3px solid #bfdbfe;">
-                                            <th style="padding: 10px 8px; text-align: left; color: var(--primary-color); font-weight: 900; border-right: 2px solid #e5e7eb;">挑戰</th>
-                                            <th style="padding: 10px 8px; text-align: left; color: var(--primary-color); font-weight: 900; border-right: 2px solid #e5e7eb;">現有新聞平台</th>
-                                            <th style="padding: 10px 8px; text-align: left; color: var(--primary-color); font-weight: 900;">AIversity</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr style="border-bottom: 2px solid #e5e7eb;">
-                                            <td style="padding: 10px 8px; vertical-align: top; font-weight: 700; border-right: 2px solid #e5e7eb; background-color: #f8fafc;">資訊破碎化</td>
-                                            <td style="padding: 10px 8px; vertical-align: top; border-right: 2px solid #e5e7eb;">資訊分散，使用者自行篩選</td>
-                                            <td style="padding: 10px 8px; vertical-align: top; background-color: #f0fdf4;"><span class="text-green-700 font-semibold">LLM 生成整合多來源的單篇新聞</span></td>
-                                        </tr>
-                                        <tr style="border-bottom: 2px solid #e5e7eb;">
-                                            <td style="padding: 10px 8px; vertical-align: top; font-weight: 700; border-right: 2px solid #e5e7eb; background-color: #f8fafc;">同溫層效應</td>
-                                            <td style="padding: 10px 8px; vertical-align: top; border-right: 2px solid #e5e7eb;">演算法放大同質內容，限制多元化</td>
-                                            <td style="padding: 10px 8px; vertical-align: top; background-color: #f0fdf4;"><span class="text-green-700 font-semibold">多元立場分析，主動呈現多種觀點</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 10px 8px; vertical-align: top; font-weight: 700; border-right: 2px solid #e5e7eb; background-color: #f8fafc;">語言與文化屏障</td>
-                                            <td style="padding: 10px 8px; vertical-align: top; border-right: 2px solid #e5e7eb;">內容受限於單一語種</td>
-                                            <td style="padding: 10px 8px; vertical-align: top; background-color: #f0fdf4;"><span class="text-green-700 font-semibold">整合外語來源，支援多語系版本</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <p class="text-slate-800 leading-relaxed" style="font-size: 3.0rem;">
+                                <span class="text-blue-800 font-bold">AIversity</span> 運用 <span class="text-blue-700 font-bold">LLM</span> 打造全方位新聞平台，解決現代人<span class="text-blue-700 font-bold">資訊破碎</span>、<span class="text-blue-700 font-bold">同溫層</span>與<span class="text-blue-700 font-bold">語言障礙</span>三大難題。透過 <span class="text-blue-700 font-bold">AI 綜合報導</span>、<span class="text-blue-700 font-bold">六何心智圖</span>與<span class="text-blue-700 font-bold">正反觀點分析</span>，協助讀者快速掌握事件全貌並打破偏見。結合<span class="text-blue-700 font-bold">互動問答</span>與<span class="text-blue-700 font-bold">多語翻譯</span>，實現跨越國界的深度閱讀體驗。
+                            </p>
                         </div>
                         
-                        <!-- 右側：系統架構 -->
+                        <!-- 右：系統架構 -->
                         <div class="section-box">
                             <div class="section-title">
-                                <i class="fas fa-sitemap"></i> 3. 系統架構 (System Architecture)
+                                <i class="fas fa-sitemap"></i> 2. 系統架構
                             </div>
                             
                             <div class="bg-white rounded-2xl border-2 border-slate-200 overflow-hidden" style="flex: 1; display: flex; justify-content: center; align-items: center; padding: 10px;">
-                                <img src="系統架構.png" alt="系統架構圖" class="w-full h-full object-contain">
+                                <img src="系統架構.png" alt="系統架構圖" style="width: 85%; height: 85%; object-fit: contain;">
                             </div>
                         </div>
                     </div>
                 </div>
                 
+                <!-- Middle Section: 平台比較 -->
+                <div class="middle-section" style="height: 135mm;">
+                    <div class="section-box" style="overflow: visible; padding: 1mm;">
+                            <div class="section-title">
+                                <i class="fas fa-code-compare"></i> 3. 現有平台 V.S. AIversity
+                            </div>
+                            
+                            <table class="w-full" style="border-collapse: collapse; font-size: 3.0rem;">
+                                <thead>
+                                    <tr style="background-color: #eff6ff; border-bottom: 3px solid #bfdbfe;">
+                                        <th style="padding: 10px 8px; text-align: left; color: var(--primary-color); font-weight: 900; border-right: 2px solid #e5e7eb;">挑戰</th>
+                                        <th style="padding: 10px 8px; text-align: left; color: var(--primary-color); font-weight: 900; border-right: 2px solid #e5e7eb;">現有新聞平台</th>
+                                        <th style="padding: 10px 8px; text-align: left; color: var(--primary-color); font-weight: 900;">AIversity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 2px solid #e5e7eb;">
+                                        <td style="padding: 10px 8px; vertical-align: top; font-weight: 700; border-right: 2px solid #e5e7eb; background-color: #f8fafc;">資訊破碎化</td>
+                                        <td style="padding: 10px 8px; vertical-align: top; border-right: 2px solid #e5e7eb;">資訊分散，使用者自行篩選</td>
+                                        <td style="padding: 10px 8px; vertical-align: top; background-color: #f0fdf4;"><span class="text-green-700 font-semibold">LLM 生成整合多來源的單篇新聞</span></td>
+                                    </tr>
+                                    <tr style="border-bottom: 2px solid #e5e7eb;">
+                                        <td style="padding: 10px 8px; vertical-align: top; font-weight: 700; border-right: 2px solid #e5e7eb; background-color: #f8fafc;">同溫層效應</td>
+                                        <td style="padding: 10px 8px; vertical-align: top; border-right: 2px solid #e5e7eb;">演算法放大同質內容，限制多元化</td>
+                                        <td style="padding: 10px 8px; vertical-align: top; background-color: #f0fdf4;"><span class="text-green-700 font-semibold">多元立場分析，主動呈現多種觀點</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px 8px; vertical-align: top; font-weight: 700; border-right: 2px solid #e5e7eb; background-color: #f8fafc;">語言與文化屏障</td>
+                                        <td style="padding: 10px 8px; vertical-align: top; border-right: 2px solid #e5e7eb;">內容受限於單一語種</td>
+                                        <td style="padding: 10px 8px; vertical-align: top; background-color: #f0fdf4;"><span class="text-green-700 font-semibold">整合外語來源，支援多語系版本</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+                
+                <!-- Bottom Section: 核心功能展示 -->
                 <div class="bottom-section">
                     <div class="section-box" style="padding: 15px; height: 335mm;">
                         <div class="section-title">
@@ -288,14 +289,14 @@
                             
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; height: 145mm;">
                                 <div class="feature-item" style="padding: 8px;">
-                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-layer-group  mr-2"></i>痛點一、彙整多家新聞</h4>
+                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2.4rem;"><i class="fas fa-layer-group  mr-2"></i>痛點一、彙整多家新聞</h4>
                                     <div class="bg-white border rounded-xl flex-grow overflow-hidden relative shadow-inner">
                                         <img src="圖片8.png" alt="彙整多家新聞示意圖" class="w-full h-full object-contain">
                                     </div>
                                 </div>
     
                                 <div class="feature-item" style="padding: 8px;">
-                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-project-diagram mr-2"></i>痛點一、快速了解專題脈絡</h4>
+                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2.4rem;"><i class="fas fa-project-diagram mr-2"></i>痛點一、快速了解專題脈絡</h4>
                                     
                                     <div class="flex gap-2 flex-grow overflow-hidden">
                                         <div class="flex flex-col gap-2" style="flex: 1;">
@@ -308,7 +309,7 @@
     
                                 <div class="feature-item" style="padding: 8px;">
                                     
-                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-robot mr-2"></i>痛點二、AI小幫手協助深入了解</h4>
+                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2.4rem;"><i class="fas fa-robot mr-2"></i>痛點二、AI小幫手協助深入了解</h4>
                                     <div class="flex gap-2 flex-grow overflow-hidden">
                                         <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
                                             <img src="AI小幫手協助深入了解.png" alt="AI小幫手示意圖1" class="w-full h-full object-contain">
@@ -319,7 +320,7 @@
     
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6mm; height: 145mm;">
                                 <div class="feature-item" style="padding: 8px;">
-                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-comments mr-2"></i>痛點二、主動提供多元觀點</h4>
+                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2.4rem;"><i class="fas fa-comments mr-2"></i>痛點二、主動提供多元觀點</h4>
                                     
                                     <div class="flex gap-2 flex-grow overflow-hidden">
                                         <div class="flex flex-col gap-2" style="flex: 1;">
@@ -334,7 +335,7 @@
                                 </div>
     
                                 <div class="feature-item" style="padding: 10px;">
-                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2rem;"><i class="fas fa-globe mr-2"></i>痛點三、提供多語系、多國來源新聞</h4>
+                                    <h4 class="font-bold text-blue-800 mb-2" style="font-size: 2.4rem;"><i class="fas fa-globe mr-2"></i>痛點三、提供多語系、多國來源新聞</h4>
                                     <div class="flex gap-2 flex-grow overflow-hidden">
                                         <div class="bg-white border rounded-lg overflow-hidden shadow-inner" style="flex: 1;">
                                             <img src="提供多語系多國來源新聞1.png" alt="多語系新聞示意圖1" class="w-full h-full object-contain">
